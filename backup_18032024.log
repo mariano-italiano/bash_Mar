@@ -1,0 +1,5 @@
+cp: cannot open '/usr/bin/chfn' for reading: Permission denied
+cp: cannot open '/usr/bin/chsh' for reading: Permission denied
+cp: cannot open '/usr/bin/locate' for reading: Permission denied
+cp: cannot open '/usr/bin/sudo' for reading: Permission denied
+cp: cannot open '/usr/bin/sudoreplay' for reading: Permission denied
