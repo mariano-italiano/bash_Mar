@@ -1,0 +1,5 @@
+username,password,shell,gekos,email
+marcin,securepass123,/bin/sh,test user marcin,markuj5@gmail.com
+testuser,,/bin/bash,test user
+,pass123!,/bin/bash,test
+marcin2,securepass,,,markuj5@gmail.com

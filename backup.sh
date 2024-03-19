@@ -32,15 +32,21 @@ fi
 function cleanup {
 	if [[ -e $BACKUP_TARGET ]]; then
 		read -n1 -p "Katalog $BACKUP_TARGET istnieje, czy chcesz kontynuować? [y/n] " DECYZJA
-		if [[ $DECYZJA = "n" || $DECYZJA = "N" ]] ; then
-			echo
-			echo "Przerywam działanie skryptu..."
-			exit 1
-		else
-			sudo rm -rf $BACKUP_TARGET
-			echo
-			echo "Usunięto katalog $BACKUP_TARGET"
-		fi
+		case  "$DECYZJA" in
+			"yes" | "y") sudo rm -rf $BACKUP_TARGET
+				     sudo rm -rf $BACKUP_TARGET.tar.gz
+				     echo
+				     echo "Usunięto katalog $BACKUP_TARGET"
+				     ;;
+			"no" | "n")  echo
+				     echo "Przerywam działanie skryptu..."
+				     exit 1
+				     ;;
+			*) 	     echo 
+			    	     echo "Podałeś złą odpowiedź, musisz podać 'y' lub 'n' !!!"
+				     exit 1
+				     ;;
+		esac
 	else
 		echo "Nie ma katalogu $BACKUP_TARGET, usuwanie pominiete"
 	fi
@@ -62,8 +68,43 @@ cleanup
 
 createDir
 
+for plik in $(find $BACKUP_LOC -perm /u+s | sort)
+do
+	if [[ $plik == *"ch"* ]] ; then
+		#echo "jestem w su"
+		continue;
+	fi
+	if [[ $plik == *"mount"* ]] ; then
+		#echo "jestem w mount"
+		break;
+	fi
+	ls -la $plik >> $BACKUP_TARGET/setuid.list
+done
+
+if [[ -e $BACKUP_TARGET/setuid.list ]]; then
+	echo "UWAGA: Znaleziono pliki z niebezpiecznymi uprawnieniami. Szczególy w '$BACKUP_TARGET/setuid.list'"
+fi
+
 cp -rp $BACKUP_LOC $BACKUP_TARGET > $LOGFILE 2>&1
 RC_CP=$?
+
+COMPRESSION=""
+while [ -z $COMPRESSION ] ; do
+	read -n 1 -p "Czy dokonać kompresji katalogu $BACKUP_TARGET ? [y/n] " ANSWER
+	if [[ $ANSWER = "y" ]] ; then
+		COMPRESSION=1
+		echo
+		echo "Kompresuje pliki backupu..."
+		tar -czf $BACKUP_TARGET.tar.gz $BACKUP_TARGET/* > /dev/null 2>&1
+	elif [[ $ANSWER = "n" ]] ; then
+		COMPRESSION=0
+		echo
+		echo "Kompresja plików pominięta"
+	else
+		echo
+		echo "Podano złą odpowiedź!"
+	fi
+done
 
 echo
 if [ $RC_BD -eq 0 ] ; then

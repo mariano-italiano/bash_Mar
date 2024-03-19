@@ -1,0 +1,9 @@
+Witam, 
+
+Konto na serwerze o adresie IP: 192.168.1.90/24 zostało utworzone. Dane do logowania:
+
+Login: marcin2
+Hasło: securepass
+Przy pierwszym logowaniu zmień hasło.
+
+Pozdrawiam, Administrator
