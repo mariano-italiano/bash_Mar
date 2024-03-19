@@ -1,0 +1,15 @@
+Nazwa wina,Kraj pochodzenia,Rodzaj,Cena
+Chardonnay Lyngrove,RPA,białe wytrawne,95.00
+Cabernet Sauvignon Merlot Lyngrove,RPA,czerwone wytrawne,95.00
+Baron De France,Fra,białe wytrawne,25.00 
+Anjou Blanc Chenin,Fra,białe wytrawne,33.00
+Anjou D’rose,Fra,różowe półwytrawne,33.00
+Anjou Rouge Cabernet,Fra,czerwone półwytrawne,33.00
+Bordeaux Graveschateau Saint Galier,Fra,białe wytrawne,89.00
+Don Kichot Tinto,Spa,czerwone półwytrawne,25.00
+Rioja Miralcampo,Spa,czerwone wytrawne,62.00
+Rioja Miralcampo,Spa,białe wytrawne,62.00
+Sherry Rich Cream,Spa,czerwone słodkie,109.00
+Sole D’italia,Ita,czerwone wytrawne,25.00 
+Valpolicella,Ita,czerwone wytrawne,45.00
+Chianti Villa Bellafonte,Ita,czerwone wytrawne,94.00
