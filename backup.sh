@@ -28,6 +28,16 @@ if [[ -z $LOGFILE || -z $BACKUP_LOC || -z BACKUP_TARGET ]] ; then
 	exit 0
 fi 
 
+
+function handle_sigint {
+	read -n 1 -p "Wcisnąłeś CTRL+C, czy na pewno chcesz zakończyć działanie programu? [y/n]" EXIT
+	if [[ $EXIT = "y" ]] ; then
+		echo
+		exit 0
+	fi
+	
+}
+
 # Funkcja usuwanie pliku logu oraz 
 function cleanup {
 	if [[ -e $BACKUP_TARGET ]]; then
@@ -63,6 +73,8 @@ function createDir {
 	RC_BD=$?
 
 }
+
+trap handle_sigint SIGINT
 
 cleanup 
 
